@@ -1,0 +1,111 @@
+.taak-lijst {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.taak-kaart {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 18px;
+  border: 1px solid #222;
+  border-radius: 18px;
+  background: #080808;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.check {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 3px solid #333;
+  font-size: 16px;
+}
+
+.check.done {
+  background: #e92aa0;
+  border-color: #e92aa0;
+}
+
+.tekst {
+  flex: 1;
+  color: #e8e8e8;
+  font-size: 26px;
+  font-weight: 700;
+  min-width: 0;
+  word-break: break-word;
+}
+
+.klaar {
+  color: #555;
+  text-decoration: line-through;
+}
+
+.tag {
+  padding: 5px 10px;
+  font-size: 10px;
+  letter-spacing: 1px;
+  font-size: 18px;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.werk {
+  color: #ff2fa0;
+  border: 2px solid #4a1532;
+  background: #180711;
+}
+
+.gezondheid {
+  color: #d8ecae;
+  border: 2px solid #343b2d;
+  background: #11140e;
+}
+
+.persoonlijk {
+  color: #ff9eb7;
+  border: 2px solid #4b2632;
+  background: #160b10;
+}
+
+.finance {
+  color: #ff6a1a;
+  border: 2px solid #4b210d;
+  background: #140905;
+}
+
+.verwijder {
+  background: transparent;
+  border: none;
+  color: #333;
+  font-size: 26px;
+}
+
+@media (max-width: 600px) {
+  .taak-kaart {
+    padding: 10px 12px;
+    gap: 8px;
+    border-radius: 12px;
+  }
+
+  .tekst {
+    font-size: 15px;
+    line-height: 1.4;
+  }
+
+  .tag {
+    font-size: 10px;
+    padding: 5px 8px;
+  }
+
+  .check {
+    width: 32px;
+    height: 32px;
+  }
+
+  .verwijder {
+    align-self: flex-end;
+  }
+}
