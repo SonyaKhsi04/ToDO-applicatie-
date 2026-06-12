@@ -1,12 +1,19 @@
+import type { Todo } from "@/types/todo";
 import styles from "../css/todos.module.css";
-import type { Todo } from "../app/page";
 
 type TaakLijstProps = {
   todos: Todo[];
   filter: string;
+  onToggle: (id: string) => void;
+  onDelete: (id: string) => void;
 };
 
-export default function TaakLijst({ todos, filter }: TaakLijstProps) {
+export default function TaakLijst({
+  todos,
+  filter,
+  onToggle,
+  onDelete,
+}: TaakLijstProps) {
   const filteredTodos = todos.filter((todo) => {
     if (filter === "Alles") return true;
     if (filter === "Open") return !todo.completed;
@@ -19,11 +26,16 @@ export default function TaakLijst({ todos, filter }: TaakLijstProps) {
     <div className={styles["taak-lijst"]}>
       {filteredTodos.map((todo) => (
         <div className={styles["taak-kaart"]} key={todo.id}>
-          <button className={`${styles.check} ${todo.completed ? styles.done : ""}`}>
+          <button
+            onClick={() => onToggle(todo.id)}
+            className={`${styles.check} ${todo.completed ? styles.done : ""}`}
+          >
             {todo.completed && "✓"}
           </button>
 
-          <p className={`${styles.tekst} ${todo.completed ? styles.klaar : ""}`}>
+          <p
+            className={`${styles.tekst} ${todo.completed ? styles.klaar : ""}`}
+          >
             {todo.title}
           </p>
 
@@ -31,7 +43,12 @@ export default function TaakLijst({ todos, filter }: TaakLijstProps) {
             {todo.category}
           </span>
 
-          <button className={styles.verwijder}>⌫</button>
+          <button
+            onClick={() => onDelete(todo.id)}
+            className={styles.verwijder}
+          >
+            ⌫
+          </button>
         </div>
       ))}
     </div>

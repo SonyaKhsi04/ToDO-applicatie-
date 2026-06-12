@@ -1,7 +1,4 @@
-let todos = [
-  { id: "1", title: "Boodschappen doen", category: "persoonlijk", completed: false },
-  { id: "2", title: "Huiswerk maken", category: "werk", completed: false },
-];
+let todos = [];
 
 export async function GET() {
   return Response.json(todos);
