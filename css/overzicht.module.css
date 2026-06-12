@@ -1,9 +1,11 @@
 .overzicht {
   background-color: #070707;
   color: white;
-  padding: 38px;
   width: 100%;
   max-width: 1130px;
+  margin: 0 auto;
+  padding: 10px;
+  box-sizing: border-box;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -73,15 +75,10 @@
 }
 
 /* 📱 TELEFOON */
-@media (max-width: 480px) {
-  .overzicht {
-    padding: 18px;
-  }
-
+@media (max-width: 500px) {
   .bovenkant {
     flex-direction: column;
     align-items: flex-start;
-    gap: 8px;
   }
 
   .titel {
@@ -106,7 +103,6 @@
   .onderkant {
     flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
     font-size: 14px;
   }
 

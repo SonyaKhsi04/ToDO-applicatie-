@@ -1,40 +1,37 @@
 "use client";
 
 import { useEffect, useState } from "react";
-const [todos, setTodos] = useState([]);
-const [filter, setFilter] = useState("all");
-
-useEffect(() => {
-  fetch("/api/todos")
-    .then((res) => res.json())
-    .then((data) => setTodos(data));
-}, []);
 
 import Overzicht from "../componenten/overzicht";
 import CategorieFilters from "../componenten/filter";
 import TaakInvoer from "../componenten/toevoegen";
 import TaakLijst from "../componenten/todos";
 
+export type Todo = {
+  id: string;
+  title: string;
+  category: string;
+  completed: boolean;
+};
+
 export default function Page() {
-  return (
-    <main>
-      <Overzicht datum="Donderdag — 4 Juni 2026" voltooid={2} totaal={7} />
+  const [todos, setTodos] = useState<Todo[]>([]);
+  const [filter, setFilter] = useState("Alles");
 
-      <CategorieFilters />
+  // DATA OPHALEN VAN DE BACKEND BIJ HET LADEN VAN DE PAGINA
+  useEffect(() => {
+    fetch("/api/todos")
+      .then((res) => res.json())
+      .then((data) => setTodos(data));
+  }, []);
 
-      <TaakInvoer />
-
-      <TaakLijst />
-    </main>
-  );
-
-  const addTodo = async (title: string) => {
+  const addTodo = async (title: string, category: string) => {
     const res = await fetch("/api/todos", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ title }),
+      body: JSON.stringify({ title, category }),
     });
 
     const newTodo = await res.json();
@@ -43,14 +40,18 @@ export default function Page() {
   };
 
   return (
-    <>
-      <Toevoegen addTodo={addTodo} />
+    <main>
+      <Overzicht
+        datum="Donderdag — 4 Juni 2026"
+        voltooid={0}
+        totaal={todos.length}
+      />
 
-      <Filter setFilter={setFilter} />
+      <CategorieFilters setFilter={setFilter} />
 
-      <Overzicht todos={todos} />
+      <TaakInvoer addTodo={addTodo} />
 
-      <Todos todos={todos} filter={filter} />
-    </>
+      <TaakLijst todos={todos} filter={filter} />
+    </main>
   );
 }

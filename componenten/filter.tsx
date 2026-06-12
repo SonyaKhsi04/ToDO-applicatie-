@@ -12,7 +12,11 @@ const filters = [
   "Finance",
 ];
 
-export default function CategorieFilters() {
+type CategorieFiltersProps = {
+  setFilter: (filter: string) => void;
+};
+
+export default function CategorieFilters({ setFilter }: CategorieFiltersProps) {
   const [activeFilter, setActiveFilter] = useState("Alles");
 
   return (
@@ -20,7 +24,10 @@ export default function CategorieFilters() {
       {filters.map((filter) => (
         <button
           key={filter}
-          onClick={() => setActiveFilter(filter)}
+          onClick={() => {
+            setActiveFilter(filter);
+            setFilter(filter);
+          }}
           className={`${activeFilter === filter ? styles.active : ""}`}
         >
           {filter}

@@ -1,4 +1,7 @@
-let todos = [];
+let todos = [
+  { id: "1", title: "Boodschappen doen", category: "persoonlijk", completed: false },
+  { id: "2", title: "Huiswerk maken", category: "werk", completed: false },
+];
 
 export async function GET() {
   return Response.json(todos);
@@ -10,6 +13,7 @@ export async function POST(req) {
   const newTodo = {
     id: crypto.randomUUID(),
     title: body.title,
+    category: body.category,
     completed: false,
   };
 

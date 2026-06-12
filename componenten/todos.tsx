@@ -1,34 +1,34 @@
 import styles from "../css/todos.module.css";
+import type { Todo } from "../app/page";
 
-const taken = [
-  { tekst: "Presentatie Afmaken Voor Klant", categorie: "werk", gedaan: false },
-  { tekst: "E-mails Beantwoorden", categorie: "werk", gedaan: true },
-  { tekst: "Sporten — 45 Minuten", categorie: "gezondheid", gedaan: false },
-  { tekst: "Boodschappen Doen", categorie: "persoonlijk", gedaan: false },
-  {
-    tekst: "Maandelijkse Uitgaven Bijhouden",
-    categorie: "finance",
-    gedaan: false,
-  },
-  { tekst: "Doktersafspraak Plannen", categorie: "gezondheid", gedaan: true },
-  { tekst: "Portfolio Website Updaten", categorie: "werk", gedaan: false },
-];
+type TaakLijstProps = {
+  todos: Todo[];
+  filter: string;
+};
 
-export default function TaakLijst() {
+export default function TaakLijst({ todos, filter }: TaakLijstProps) {
+  const filteredTodos = todos.filter((todo) => {
+    if (filter === "Alles") return true;
+    if (filter === "Open") return !todo.completed;
+    if (filter === "Klaar") return todo.completed;
+
+    return todo.category === filter.toLowerCase();
+  });
+
   return (
     <div className={styles["taak-lijst"]}>
-      {taken.map((taak, index) => (
-        <div className={styles["taak-kaart"]} key={index}>
-          <button className={`${styles.check} ${taak.gedaan ? styles.done : ""}`}>
-            {taak.gedaan && "✓"}
+      {filteredTodos.map((todo) => (
+        <div className={styles["taak-kaart"]} key={todo.id}>
+          <button className={`${styles.check} ${todo.completed ? styles.done : ""}`}>
+            {todo.completed && "✓"}
           </button>
 
-          <p className={`${styles.tekst} ${taak.gedaan ? styles.klaar : ""}`}>
-            {taak.tekst}
+          <p className={`${styles.tekst} ${todo.completed ? styles.klaar : ""}`}>
+            {todo.title}
           </p>
 
-          <span className={`${styles.tag} ${styles[taak.categorie]}`}>
-            {taak.categorie}
+          <span className={`${styles.tag} ${styles[todo.category]}`}>
+            {todo.category}
           </span>
 
           <button className={styles.verwijder}>⌫</button>
