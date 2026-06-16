@@ -1,7 +1,9 @@
-let todos = [];
+if (!global.todos) {
+  global.todos = [];
+}
 
 export async function GET() {
-  return Response.json(todos);
+  return Response.json(global.todos);
 }
 
 export async function POST(req) {
@@ -14,7 +16,7 @@ export async function POST(req) {
     completed: false,
   };
 
-  todos.push(newTodo);
+  global.todos.push(newTodo);
 
   return Response.json(newTodo);
 }

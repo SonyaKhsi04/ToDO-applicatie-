@@ -82,7 +82,10 @@
   color: #333;
   font-size: 26px;
 }
-
+.klaar {
+  color: #555;
+  text-decoration: line-through;
+}
 @media (max-width: 600px) {
   .taak-kaart {
     padding: 10px 12px;
