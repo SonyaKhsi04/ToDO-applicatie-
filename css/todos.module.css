@@ -112,3 +112,20 @@
     align-self: flex-end;
   }
 }
+.cardDone {
+  animation: neonPulse 1.2s ease-in-out;
+}
+
+@keyframes neonPulse {
+  0% {
+    box-shadow: 0 0 0px #e92aa0;
+  }
+  50% {
+    box-shadow:
+      0 0 10px #e92aa0,
+      0 0 20px #ff4fd8;
+  }
+  100% {
+    box-shadow: 0 0 0px #e92aa0;
+  }
+}

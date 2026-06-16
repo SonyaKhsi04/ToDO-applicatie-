@@ -25,7 +25,12 @@ export default function TaakLijst({
   return (
     <div className={styles["taak-lijst"]}>
       {filteredTodos.map((todo) => (
-        <div className={styles["taak-kaart"]} key={todo.id}>
+        <div
+          className={`${styles["taak-kaart"]} ${
+            todo.completed ? styles.cardDone : ""
+          }`}
+          key={todo.id}
+        >
           <button
             onClick={() => onToggle(todo.id)}
             className={`${styles.check} ${todo.completed ? styles.done : ""}`}
