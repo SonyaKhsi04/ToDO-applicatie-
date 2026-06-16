@@ -2,6 +2,7 @@
 import { useState } from "react";
 import styles from "../css/filter.module.css";
 
+//Lijst met beschikbare filters voor de todo-app
 const filters = [
   "Alles",
   "Open",
@@ -17,6 +18,7 @@ type CategorieFiltersProps = {
 };
 
 export default function CategorieFilters({ setFilter }: CategorieFiltersProps) {
+  //Lokale state om bij te houden welke knop visueel actief is
   const [activeFilter, setActiveFilter] = useState("Alles");
 
   return (

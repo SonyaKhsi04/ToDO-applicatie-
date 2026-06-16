@@ -1,5 +1,6 @@
 import styles from "../css/overzicht.module.css";
 
+//Dit component krijgt alle data van bovenaf
 type OverzichtProps = {
   datum: string;
   voltooid: number;
@@ -8,7 +9,7 @@ type OverzichtProps = {
 
 export default function Overzicht({ datum, voltooid, totaal }: OverzichtProps) {
   const percentage = Math.round((voltooid / totaal) * 100);
-
+  //Dit component krijgt alle data van bovenaf
   return (
     <section className={styles.overzicht}>
       <div className={styles.bovenkant}>
@@ -17,7 +18,7 @@ export default function Overzicht({ datum, voltooid, totaal }: OverzichtProps) {
           {voltooid}/{totaal} Voltooid
         </p>
       </div>
-
+      {/* Titel van het dashboard overzicht */}
       <h1 className={styles.titel}>Mijn Taken</h1>
 
       <div className={styles.voortgangBalk}>

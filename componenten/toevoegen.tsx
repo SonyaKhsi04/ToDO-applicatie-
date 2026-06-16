@@ -2,6 +2,7 @@
 import { useState } from "react";
 import styles from "../css/toevoegen.module.css";
 
+// ontvangt een functie van de parent component om nieuwe taken toe te voegen
 type TaakInvoerProps = {
   addTodo: (title: string, category: string) => Promise<void>;
 };
@@ -12,10 +13,11 @@ export default function TaakInvoer({ addTodo }: TaakInvoerProps) {
 
   const handleSubmit = async () => {
     const trimmedTitle = title.trim();
-
+    // voorkomt lege taken
     if (!trimmedTitle) return;
 
     await addTodo(trimmedTitle, category);
+    // reset na het invullen
     setTitle("");
   };
 

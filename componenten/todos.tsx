@@ -1,6 +1,7 @@
 import type { Todo } from "@/types/todo";
 import styles from "../css/todos.module.css";
 
+//ontvangt de taken
 type TaakLijstProps = {
   todos: Todo[];
   filter: string;
@@ -31,6 +32,7 @@ export default function TaakLijst({
           }`}
           key={todo.id}
         >
+          {/* ✔ Knop om taak af te vinken / terug open te zetten */}
           <button
             onClick={() => onToggle(todo.id)}
             className={`${styles.check} ${todo.completed ? styles.done : ""}`}
@@ -47,7 +49,7 @@ export default function TaakLijst({
           <span className={`${styles.tag} ${styles[todo.category]}`}>
             {todo.category}
           </span>
-
+          {/* 🗑 Verwijder knop */}
           <button
             onClick={() => onDelete(todo.id)}
             className={styles.verwijder}

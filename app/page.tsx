@@ -13,19 +13,21 @@ export type Todo = {
   category: string;
   completed: boolean;
 };
-
+//State: huidige filter (bijv. Alles, Werk, School, etc.)
 export default function Page() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [filter, setFilter] = useState("Alles");
 
-  // GET TODOS
+  //GET TODOS
+  //Haalt alle todos op van de API zodra de pagina laadt
   useEffect(() => {
     fetch("/api/todos")
       .then((res) => res.json())
       .then((data) => setTodos(data));
   }, []);
 
-  // ➕ ADD TODO
+  //ADD TODO
+  //Stuurt nieuwe todo naar backend en voegt deze toe aan state
   const addTodo = async (title: string, category: string) => {
     const res = await fetch("/api/todos", {
       method: "POST",
@@ -40,18 +42,20 @@ export default function Page() {
     setTodos((prev) => [...prev, newTodo]);
   };
 
-  // ✔ TOGGLE TODO
+  //TOGGLE TODO (voltooid / niet voltooid)
+  //Past status aan in backend en update lokale state
   const toggleTodo = async (id: string) => {
     const res = await fetch(`/api/todos/${id}`, {
       method: "PATCH",
     });
 
     const updated = await res.json();
-
+    //Vervang oude todo met geüpdatete versie
     setTodos((prev) => prev.map((todo) => (todo.id === id ? updated : todo)));
   };
 
-  // 🗑 DELETE TODO
+  //DELETE TODO
+  //Verwijdert todo in backend en haalt hem ook uit state
   const deleteTodo = async (id: string) => {
     await fetch(`/api/todos/${id}`, {
       method: "DELETE",
